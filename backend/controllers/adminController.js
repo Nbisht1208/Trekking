@@ -50,16 +50,23 @@ export const login = async (req, res) => {
 
     const token = generateToken(admin);
 
+    // Set the httpOnly cookie the auth middleware expects
+    res.cookie('adminToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // false on localhost (plain http)
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days, matches JWT expiresIn
+    });
+
     res.json({
       success: true,
-      token,
       admin: { username: admin.username, role: admin.role },
+      // token removed from the body — it now lives only in the httpOnly cookie
     });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
 };
-
 // GET /api/admin/verify (protected)
 export const verify = async (req, res) => {
   // req.admin set by auth middleware
@@ -92,4 +99,9 @@ export const changePassword = async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
+};
+
+export const logout = (req, res) => {
+  res.clearCookie('adminToken');
+  res.json({ success: true, message: 'Logged out' });
 };

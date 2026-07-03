@@ -12,6 +12,7 @@ import contactRoutes from './routes/contact.js';
 import galleryRoutes from './routes/gallery.js';
 import faqRoutes from './routes/faq.js';
 import { seedAdmin } from './controllers/adminController.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -22,8 +23,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true,
+}));
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded images statically

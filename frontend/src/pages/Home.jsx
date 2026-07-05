@@ -90,7 +90,7 @@ const PackageCard = ({ pkg }) => (
     <div className="relative overflow-hidden h-48">
       {pkg.images?.[0] ? (
         <img
-          src={`http://localhost:5000${pkg.images[0].url}`}
+          src={pkg.images[0].url}
           alt={pkg.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />

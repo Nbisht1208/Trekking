@@ -1,15 +1,13 @@
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
 import { Contact, Gallery, FAQ } from '../models/index.js';
+import cloudinary from '../utils/cloudinary.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const deleteGalleryFile = (filename) => {
-  const filePath = path.join(__dirname, '..', 'uploads', 'gallery', filename);
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath);
+// Helper: delete a gallery image from Cloudinary by its public_id.
+// Errors are logged but not thrown — a failed cleanup shouldn't block the request.
+const deleteGalleryFile = async (publicId) => {
+  try {
+    await cloudinary.uploader.destroy(publicId);
+  } catch (err) {
+    console.error(`Failed to delete Cloudinary image ${publicId}:`, err.message);
   }
 };
 
@@ -93,6 +91,7 @@ export const getGalleryImages = async (req, res) => {
 };
 
 // POST /api/gallery (admin, multipart)
+// req.files[].path = Cloudinary secure URL, req.files[].filename = Cloudinary public_id
 export const uploadGalleryImagesHandler = async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
@@ -102,7 +101,7 @@ export const uploadGalleryImagesHandler = async (req, res) => {
     const { category = 'Other', title } = req.body;
 
     const docs = req.files.map((file) => ({
-      url: `/uploads/gallery/${file.filename}`,
+      url: file.path,
       filename: file.filename,
       title,
       category,
@@ -134,7 +133,7 @@ export const deleteGalleryImage = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Image not found' });
     }
 
-    deleteGalleryFile(image.filename);
+    await deleteGalleryFile(image.filename);
     await image.deleteOne();
 
     res.json({ success: true, message: 'Image deleted' });

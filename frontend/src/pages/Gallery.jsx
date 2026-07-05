@@ -89,7 +89,7 @@ const Gallery = () => {
                 onClick={() => setLightbox(img)}
               >
                 <img
-                  src={`http://localhost:5000${img.url}`}
+                  src={img.url}
                   alt={img.title || img.category}
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -123,7 +123,7 @@ const Gallery = () => {
           </button>
           <div onClick={(e) => e.stopPropagation()} className="max-w-4xl w-full">
             <img
-              src={`http://localhost:5000${lightbox.url}`}
+              src={lightbox.url}
               alt={lightbox.title || lightbox.category}
               className="w-full max-h-[80vh] object-contain rounded-xl"
             />

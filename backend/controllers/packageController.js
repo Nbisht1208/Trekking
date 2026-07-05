@@ -1,10 +1,5 @@
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
 import Package from '../models/Package.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import cloudinary from '../utils/cloudinary.js';
 
 // Helper: turn a title into a URL-safe slug
 const slugify = (text) =>
@@ -45,20 +40,25 @@ const parseJSONFields = (body) => {
   return parsed;
 };
 
-// Helper: build image objects from uploaded files
+// Helper: build image objects from Cloudinary upload results.
+// multer-storage-cloudinary populates file.path with the secure URL and
+// file.filename with the Cloudinary public_id (needed later for deletion).
 const buildImageObjects = (files) => {
   if (!files || files.length === 0) return [];
   return files.map((file) => ({
-    url: `/uploads/packages/${file.filename}`,
+    url: file.path,
     filename: file.filename,
   }));
 };
 
-// Helper: delete a physical image file from disk
-const deleteImageFile = (filename) => {
-  const filePath = path.join(__dirname, '..', 'uploads', 'packages', filename);
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath);
+// Helper: delete an image from Cloudinary by its public_id.
+// Errors are logged but not thrown — a failed cleanup shouldn't block
+// the package delete/update operation itself.
+const deleteImageFile = async (publicId) => {
+  try {
+    await cloudinary.uploader.destroy(publicId);
+  } catch (err) {
+    console.error(`Failed to delete Cloudinary image ${publicId}:`, err.message);
   }
 };
 
@@ -68,7 +68,7 @@ const deleteImageFile = (filename) => {
 export const getPackages = async (req, res) => {
   try {
     const {
-      
+      category,
       difficulty,
       minPrice,
       maxPrice,
@@ -80,7 +80,7 @@ export const getPackages = async (req, res) => {
 
     const filter = { isActive: true };
 
-    
+    if (category) filter.category = category;
     if (difficulty) filter.difficulty = difficulty;
     if (featured === 'true') filter.isFeatured = true;
 
@@ -213,8 +213,8 @@ export const deletePackage = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Package not found' });
     }
 
-    // Clean up image files from disk
-    pkg.images.forEach((img) => deleteImageFile(img.filename));
+    // Clean up images from Cloudinary
+    await Promise.all(pkg.images.map((img) => deleteImageFile(img.filename)));
 
     await pkg.deleteOne();
     res.json({ success: true, message: 'Package deleted' });
@@ -239,7 +239,7 @@ export const deletePackageImage = async (req, res) => {
     pkg.images = pkg.images.filter((img) => img.filename !== filename);
     await pkg.save();
 
-    deleteImageFile(filename);
+    await deleteImageFile(filename);
 
     res.json({ success: true, data: pkg });
   } catch (err) {

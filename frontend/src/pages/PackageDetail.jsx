@@ -20,13 +20,13 @@ const ImageGallery = ({ images, title }) => {
   return (
     <div>
       <div className="rounded-2xl overflow-hidden h-80 sm:h-96 mb-3">
-        <img src={`http://localhost:5000${images[active].url}`} alt={title} className="w-full h-full object-cover" />
+        <img src={images[active].url} alt={title} className="w-full h-full object-cover" />
       </div>
       {images.length > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-1">
           {images.map((img, i) => (
             <button key={i} onClick={() => setActive(i)} className={`shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-colors ${active === i ? 'border-yellow-500' : 'border-transparent'}`}>
-              <img src={`http://localhost:5000${img.url}`} alt={`${title} ${i + 1}`} className="w-full h-full object-cover" />
+              <img src={img.url} alt={`${title} ${i + 1}`} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>

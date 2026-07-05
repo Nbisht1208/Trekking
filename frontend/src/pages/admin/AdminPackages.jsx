@@ -108,7 +108,7 @@ const AdminPackages = () => {
                         <div className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden flex-shrink-0 flex items-center justify-center">
                           {pkg.images?.[0]?.url ? (
                             <img
-                              src={`http://localhost:5000${pkg.images[0].url}`}
+                              src={pkg.images[0].url}
                               alt={pkg.title}
                               className="w-full h-full object-cover"
                             />

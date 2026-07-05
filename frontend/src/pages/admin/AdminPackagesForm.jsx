@@ -285,7 +285,23 @@ const AdminPackageForm = () => {
               />
             </div>
 
-           
+            <div>
+              <label className="block text-sm font-medium text-gray-600 mb-1.5">
+                Difficulty
+              </label>
+              <select
+                value={form.difficulty}
+                onChange={(e) => updateField('difficulty', e.target.value)}
+                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent bg-white"
+              >
+                <option value="">Select difficulty</option>
+                {difficulties.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </section>
 

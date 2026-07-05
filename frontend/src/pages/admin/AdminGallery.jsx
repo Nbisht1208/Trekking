@@ -152,7 +152,7 @@ const AdminGallery = () => {
               className="break-inside-avoid rounded-xl overflow-hidden relative group"
             >
               <img
-                src={`http://localhost:5000${img.url}`}
+                src={img.url}
                 alt={img.title || img.category}
                 className="w-full object-cover"
               />

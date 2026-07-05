@@ -68,7 +68,7 @@ const deleteImageFile = (filename) => {
 export const getPackages = async (req, res) => {
   try {
     const {
-      category,
+      
       difficulty,
       minPrice,
       maxPrice,
@@ -80,7 +80,7 @@ export const getPackages = async (req, res) => {
 
     const filter = { isActive: true };
 
-    if (category) filter.category = category;
+    
     if (difficulty) filter.difficulty = difficulty;
     if (featured === 'true') filter.isFeatured = true;
 

@@ -1,5 +1,6 @@
 import Booking from '../models/Booking.js';
 import Package from '../models/Package.js';
+import { sendBookingStatusEmail } from '../utils/email.js';
 
 // Helper: generate next sequential bookingId like TRK00001
 const generateBookingId = async () => {
@@ -196,7 +197,9 @@ export const updateBookingStatus = async (req, res) => {
       return res.status(400).json({ success: false, message: 'status is required' });
     }
 
-    const booking = await Booking.findById(req.params.id);
+    // Populate package here so the confirmation/cancellation email can include
+    // the trek title and price without a second query.
+    const booking = await Booking.findById(req.params.id).populate('package', 'title price');
     if (!booking) {
       return res.status(404).json({ success: false, message: 'Booking not found' });
     }
@@ -221,6 +224,9 @@ export const updateBookingStatus = async (req, res) => {
     if (status === 'Cancelled') booking.cancelReason = cancelReason;
 
     await booking.save();
+
+    // Fire-and-forget: email failures are logged internally and never affect this response.
+    sendBookingStatusEmail(booking);
 
     res.json({ success: true, data: booking });
   } catch (err) {

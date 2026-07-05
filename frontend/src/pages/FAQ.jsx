@@ -14,8 +14,9 @@ const FAQ = () => {
   useEffect(() => {
     const fetchFaqs = async () => {
       try {
+        // Backend mounts this router at /api/faq (singular) — see server.js
         const params = activeCategory !== 'All' ? `?category=${activeCategory}` : '';
-        const res = await API.get(`/faqs${params}`);
+        const res = await API.get(`/faq${params}`);
         setFaqs(res.data.data);
       } catch (err) {
         console.error(err);

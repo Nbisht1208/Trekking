@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,7 @@ const Navbar = () => {
     { name: 'Gallery', path: '/gallery' },
     { name: 'FAQ', path: '/faq' },
     { name: 'Contact', path: '/contact' },
+    { name: 'Terms & Conditions', path: '/termsandconditions' },
   ];
 
   return (
@@ -20,9 +22,11 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-yellow-500 rounded-full flex items-center justify-center font-bold text-[#0a1628] text-lg">
-              M
-            </div>
+            <img
+              src={logo}
+              alt="Matrika Tours & Travels"
+              className="w-10 h-10 rounded-full object-cover object-center flex-shrink-0"
+            />
             <div className="leading-tight">
               <p className="font-bold text-sm text-white">Matrika Tours</p>
               <p className="text-xs text-yellow-400">& Travels</p>
@@ -36,8 +40,7 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `text-sm font-medium transition-colors hover:text-yellow-400 ${
-                    isActive ? 'text-yellow-400' : 'text-gray-300'
+                  `text-sm font-medium transition-colors hover:text-yellow-400 ${isActive ? 'text-yellow-400' : 'text-gray-300'
                   }`
                 }
               >
@@ -81,10 +84,9 @@ const Navbar = () => {
               to={link.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
-                `block py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-yellow-500 text-[#0a1628]'
-                    : 'text-gray-300 hover:text-yellow-400'
+                `block py-2 px-3 rounded-lg text-sm font-medium transition-colors ${isActive
+                  ? 'bg-yellow-500 text-[#0a1628]'
+                  : 'text-gray-300 hover:text-yellow-400'
                 }`
               }
             >

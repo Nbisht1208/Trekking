@@ -6,20 +6,20 @@ const contactInfo = [
   {
     icon: Phone,
     label: 'Call Us',
-    value: '+91 98765 43210',
+    value: '+91 9027378308',
     sub: 'Mon - Sat, 9am - 7pm',
   },
   {
     icon: Mail,
     label: 'Email Us',
-    value: 'hello@matrikatreks.com',
+    value: 'matrikatoursandtravels3@gmail.com',
     sub: 'We reply within 24 hours',
   },
   {
     icon: MapPin,
     label: 'Visit Us',
-    value: 'Mall Road, Manali',
-    sub: 'Himachal Pradesh, India',
+    value: 'Jogiwala, Dehradun',
+    sub: 'Uttarakhand, India - 248001',
   },
   {
     icon: Clock,
@@ -88,24 +88,7 @@ const Contact = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Info Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-          {contactInfo.map(({ icon: Icon, label, value, sub }) => (
-            <div
-              key={label}
-              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-yellow-400 transition-colors"
-            >
-              <div className="w-10 h-10 rounded-full bg-[#0a1628] flex items-center justify-center mb-3">
-                <Icon size={18} className="text-yellow-400" />
-              </div>
-              <p className="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-1">
-                {label}
-              </p>
-              <p className="text-sm font-medium text-[#0a1628]">{value}</p>
-              <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
-            </div>
-          ))}
-        </div>
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Form */}
@@ -244,7 +227,7 @@ const Contact = () => {
           <div className="lg:col-span-2 rounded-2xl overflow-hidden border border-gray-200 min-h-[320px]">
             <iframe
               title="Matrika Treks Location"
-              src="https://www.google.com/maps?q=Mall+Road,+Manali,+Himachal+Pradesh&output=embed"
+              src="https://www.google.com/maps?q=Jogiwala,+Dehradun,+Uttarakhand+248001&output=embed"
               className="w-full h-full min-h-[320px]"
               style={{ border: 0 }}
               allowFullScreen=""
@@ -254,6 +237,24 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      {/* Info Cards */}
+        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {contactInfo.map(({ icon: Icon, label, value, sub }) => (
+            <div
+              key={label}
+              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-yellow-400 transition-colors"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#0a1628] flex items-center justify-center mb-3">
+                <Icon size={18} className="text-yellow-400" />
+              </div>
+              <p className="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-1">
+                {label}
+              </p>
+              <p className="text-sm font-medium text-[#0a1628]">{value}</p>
+              <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
+            </div>
+          ))}
+        </div>
     </div>
   );
 };

@@ -32,12 +32,6 @@ const packageSchema = new mongoose.Schema(
       currency: { type: String, default: 'INR' },
     },
 
-    category: {
-      type: String,
-      enum: ['Himalayan', 'Forest', 'Desert', 'Coastal', 'Wildlife', 'Cultural', 'Other'],
-      required: true,
-    },
-
     location: {
       region: { type: String },
       state: { type: String },

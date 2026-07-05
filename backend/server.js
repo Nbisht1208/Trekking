@@ -1,7 +1,7 @@
+import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -13,8 +13,6 @@ import galleryRoutes from './routes/gallery.js';
 import faqRoutes from './routes/faq.js';
 import { seedAdmin } from './controllers/adminController.js';
 import cookieParser from 'cookie-parser';
-
-dotenv.config();
 
 // __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);

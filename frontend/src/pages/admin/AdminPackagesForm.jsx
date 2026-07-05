@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { X, Plus, Upload, ImageIcon, ChevronLeft } from 'lucide-react';
 import API from '../../api/axios';
 
-const categories = ['Himalayan', 'Forest', 'Desert', 'Coastal', 'Wildlife', 'Cultural', 'Other'];
+
 const difficulties = ['Easy', 'Moderate', 'Difficult', 'Extreme'];
 
 const emptyDay = () => ({ title: '', description: '' });
@@ -78,7 +78,6 @@ const AdminPackageForm = () => {
     title: '',
     shortDescription: '',
     fullDescription: '',
-    category: '',
     difficulty: '',
     days: '',
     nights: '',
@@ -148,7 +147,6 @@ const AdminPackageForm = () => {
     if (!form.title.trim()) return 'Title is required';
     if (!form.shortDescription.trim()) return 'Short description is required';
     if (!form.fullDescription.trim()) return 'Full description is required';
-    if (!form.category) return 'Category is required';
     if (!form.difficulty) return 'Difficulty is required';
     if (!form.days || !form.nights) return 'Duration (days & nights) is required';
     if (!form.priceAmount) return 'Price is required';
@@ -173,7 +171,6 @@ const AdminPackageForm = () => {
     formData.append('title', form.title.trim());
     formData.append('shortDescription', form.shortDescription.trim());
     formData.append('fullDescription', form.fullDescription.trim());
-    formData.append('category', form.category);
     formData.append('difficulty', form.difficulty);
     formData.append('isFeatured', form.isFeatured);
     formData.append('isActive', form.isActive);
@@ -288,40 +285,7 @@ const AdminPackageForm = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-1.5">Category</label>
-                <select
-                  value={form.category}
-                  onChange={(e) => updateField('category', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent bg-white"
-                >
-                  <option value="">Select category</option>
-                  {categories.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-1.5">
-                  Difficulty
-                </label>
-                <select
-                  value={form.difficulty}
-                  onChange={(e) => updateField('difficulty', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent bg-white"
-                >
-                  <option value="">Select difficulty</option>
-                  {difficulties.map((d) => (
-                    <option key={d} value={d}>
-                      {d}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+           
           </div>
         </section>
 

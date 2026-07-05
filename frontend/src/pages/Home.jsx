@@ -4,6 +4,11 @@ import {
   Shield, Heart, Star, Users, MapPin, Clock, ChevronRight,
   Award, Compass, HeartHandshake, Mountain
 } from 'lucide-react';
+import Ankit from "../assets/Ankit.png";
+import Archana from "../assets/Archana.png";
+import Harshmani from "../assets/Harsh.png";
+import Shivani from "../assets/Shivani.png";
+import Arjun from "../assets/Arjun.png";
 import API from '../api/axios';
 
 // ─── Hero Section ───────────────────────────────────────────────
@@ -24,17 +29,16 @@ const Hero = () => (
     <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div className="max-w-2xl">
         <p className="text-yellow-400 text-sm font-semibold uppercase tracking-widest mb-3">
-          Women-Led • Women-First
-        </p>
+          COMMUNITY-LED • ADVENTURE-FIRST          </p>
         <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight mb-4">
           Empower &{' '}
           <span className="text-yellow-400">Explore</span>
         </h1>
         <p className="text-lg text-gray-300 mb-2 font-medium">
-          "Empower & Explore the Journey Fearlessly Together"
+          "Empower & Explore the Journey Together — for Women & Groups Alike"
         </p>
         <p className="text-gray-400 mb-8 leading-relaxed">
-          Join thousands of fearless women discovering India's most breathtaking, transformative, and empowering destinations.
+          Join thousands of fearless explorers discovering India’s most breathtaking, transformative, and empowering destinations — with trips designed especially for women and open to all who seek meaningful travel.
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
@@ -291,58 +295,118 @@ const WhyUs = () => {
 };
 
 // ─── About Section ───────────────────────────────────────────────
-const About = () => (
-  <section className="py-16 bg-white">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Image */}
-        <div className="relative">
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80"
-              alt="Founder"
-              className="w-full h-80 object-cover"
-            />
-          </div>
-          <div className="absolute -bottom-4 -right-4 bg-yellow-500 rounded-2xl p-4 shadow-lg">
-            <p className="text-[#0a1628] font-bold text-lg">8+ Years</p>
-            <p className="text-[#0a1628] text-xs">of Empowering Women</p>
-          </div>
+const About = () => {
+  const team = [
+    {
+      name: 'Archana Uniyal',
+      role: 'Founder',
+      initials: 'AU',
+      photo: Archana, // e.g. '/team/archana.jpg' — leave empty to fall back to initials
+      av: 'bg-amber-100 text-amber-900',
+      badge: 'Leadership',
+      badgeColor: 'bg-amber-100 text-amber-800',
+    },
+    {
+      name: 'Harshmani Uniyal',
+      role: 'CEO',
+      initials: 'HU',
+      photo: Harshmani,
+      av: 'bg-[#0a1628] text-yellow-400',
+      badge: 'Leadership',
+      badgeColor: 'bg-[#0a1628] text-yellow-400',
+    },
+    {
+      name: 'Ankit Sajwan',
+      role: 'Company Manager',
+      initials: 'AS',
+      photo: Ankit,
+      av: 'bg-amber-100 text-amber-900',
+      badge: 'Operations',
+      badgeColor: 'bg-blue-50 text-blue-800',
+    },
+    {
+      name: 'Arjun Uniyal',
+      role: 'Accounts Manager',
+      initials: 'AU',
+      photo: Arjun,
+      av: 'bg-[#0a1628] text-yellow-400',
+      badge: 'Finance',
+      badgeColor: 'bg-green-50 text-green-800',
+    },
+    {
+      name: 'Shivani',
+      role: 'Marketing Manager',
+      initials: 'SH',
+      photo: Shivani,
+      av: 'bg-amber-100 text-amber-900',
+      badge: 'Growth',
+      badgeColor: 'bg-purple-50 text-purple-800',
+    },
+
+  ];
+
+  return (
+    <section className="py-16 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <div className="text-center mb-12">
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-700 bg-amber-100 px-4 py-1.5 rounded-full mb-3">
+            The People Behind the Magic
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1628] mb-2">
+            Meet the Team
+          </h2>
+          <p className="text-gray-400 text-sm">Six passionate people. One mission.</p>
         </div>
 
-        {/* Content */}
-        <div>
-          <p className="text-yellow-500 text-sm font-semibold uppercase tracking-widest mb-2">
-            Born from a Dream
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1628] mb-4">
-            Born from a Dream to Empower Every Woman
-          </h2>
-          <p className="text-gray-500 mb-4 leading-relaxed text-sm">
-            Matrika Tours & Travels was born from a single belief — every woman deserves to explore the world fearlessly. Founded by Priya Sharma, a solo traveler turned passionate guide, our journeys are built on trust, safety, and the transformative power of travel.
-          </p>
-          <p className="text-gray-500 mb-6 leading-relaxed text-sm">
-            From the snow-capped Himalayas to the sun-kissed coastlines, we create spaces where women come as strangers and leave as sisters.
-          </p>
-          <blockquote className="bg-[#0a1628] rounded-xl p-4 mb-6">
-            <p className="text-yellow-400 italic text-sm">
-              "Every woman who dares to explore becomes a pioneer, a trailblazer, and a role model for the next."
-            </p>
-          </blockquote>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-[#0a1628] font-bold">
-              P
+        {/* Team Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
+          {team.map((member) => (
+            <div
+              key={member.name}
+              className="bg-white border border-gray-100 hover:border-yellow-400 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 group"
+            >
+              {/* Avatar with dashed ring */}
+              <div className="relative w-18 h-18 mx-auto mb-4" style={{ width: '72px', height: '72px' }}>
+                <div
+                  className="absolute inset-0 rounded-full border-2 border-dashed border-gray-200 group-hover:border-yellow-400 transition-colors duration-300"
+                  style={{
+                    inset: '-6px',
+                    position: 'absolute',
+                    borderRadius: '50%',
+                    width: 'calc(100% + 12px)',
+                    height: 'calc(100% + 12px)',
+                  }}
+                />
+                {member.photo ? (
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="w-full h-full rounded-full object-cover object-center"
+                  />
+                ) : (
+                  <div
+                    className={`w-full h-full rounded-full flex items-center justify-center text-sm font-bold ${member.av}`}
+                  >
+                    {member.initials}
+                  </div>
+                )}
+              </div>
+
+              <p className="font-bold text-[#0a1628] text-sm leading-tight mb-1">{member.name}</p>
+              <p className="text-gray-400 text-xs uppercase tracking-wider mb-3">{member.role}</p>
+              <span className={`text-xs font-semibold px-3 py-1 rounded-full ${member.badgeColor}`}>
+                {member.badge}
+              </span>
             </div>
-            <div>
-              <p className="font-semibold text-[#0a1628] text-sm">Priya Sharma</p>
-              <p className="text-xs text-gray-400">Founder, Matrika Tours & Travels</p>
-            </div>
-          </div>
+          ))}
         </div>
+
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 // ─── Testimonials ────────────────────────────────────────────────
 const Testimonials = () => {
@@ -375,8 +439,7 @@ const Testimonials = () => {
             Real Stories
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#0a1628]">
-            What Our Sisters Say
-          </h2>
+            What Our Travelers Say          </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
@@ -525,11 +588,10 @@ const QuickContactForm = () => {
             type="button"
             key={cat}
             onClick={() => setForm({ ...form, subject: `${cat} Trek Enquiry` })}
-            className={`text-xs px-3 py-1 rounded-full border transition-colors ${
-              form.subject === `${cat} Trek Enquiry`
-                ? 'bg-yellow-500 border-yellow-500 text-[#0a1628] font-semibold'
-                : 'border-gray-200 text-gray-500 hover:border-yellow-400'
-            }`}
+            className={`text-xs px-3 py-1 rounded-full border transition-colors ${form.subject === `${cat} Trek Enquiry`
+              ? 'bg-yellow-500 border-yellow-500 text-[#0a1628] font-semibold'
+              : 'border-gray-200 text-gray-500 hover:border-yellow-400'
+              }`}
           >
             {cat}
           </button>
